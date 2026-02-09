@@ -2,8 +2,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BibliotecaApp {
-
-    // Estructura: prestamo = [idPrestamo, nombreUsuario, tituloLibro, diasPrestamo, multaPorDia]
     static ArrayList<ArrayList<Object>> prestamos = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
 
@@ -54,7 +52,6 @@ public class BibliotecaApp {
 
     static void buscarPrestamoPorId() {
         System.out.println("--- Buscar Prestamo ---");
-        // Compatible: Lee como String y compara usando toString() para evitar error con el int del Codigo 1
         String idBuscado = leerTexto("Ingrese el ID del prestamo: ");
         boolean encontrado = false;
 
@@ -94,8 +91,6 @@ public class BibliotecaApp {
                 int nuevosDias = leerEntero("Nuevos dias de prestamo: ");
                 prestamo.set(3, nuevosDias);
                 
-                // CAMBIO REALIZADO: Se usa leerEntero para ser compatible con el Código 1
-                // El código 1 guarda la multa como int, el código 2 original intentaba guardarlo como double.
                 int nuevaMulta = leerEntero("Nueva multa por dia: ");
                 prestamo.set(4, nuevaMulta);
                 
