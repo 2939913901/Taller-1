@@ -30,21 +30,21 @@ public class BibliotecaApp {
 
             switch (opcion) {
 
-                case 1 -> registrarPrestamo();
+                case 1: registrarPrestamo();
 
-                case 2 -> mostrarPrestamos();
+                case 2: mostrarPrestamos();
 
-                case 3 -> buscarPrestamoPorId();
+                case 3: buscarPrestamoPorId();
 
-                case 4 -> actualizarPrestamo();
+                case 4: actualizarPrestamo();
 
-                case 5 -> eliminarPrestamo();
+                case 5: eliminarPrestamo();
 
-                case 6 -> calcularTotalMultas();
+                case 6: calcularTotalMultas();
 
-                case 7 -> System.out.println("Saliendo...");
+                case 7: System.out.println("Saliendo...");
 
-                default -> System.out.println("Opción inválida.");
+                default: System.out.println("Opción inválida.");
 
             }
 
