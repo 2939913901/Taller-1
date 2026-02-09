@@ -18,9 +18,9 @@ public class BibliotecaApp {
                 break;
                 case 2: mostrarPrestamos();
                 break;
-                case 3: buscarPrestamoPorId(); // Tu tarea
+                case 3: buscarPrestamoPorId(); 
                 break;
-                case 4: actualizarPrestamo();  // Tu tarea
+                case 4: actualizarPrestamo(); 
                 break;
                 case 5: eliminarPrestamo();
                 break;
@@ -54,6 +54,7 @@ public class BibliotecaApp {
 
     static void buscarPrestamoPorId() {
         System.out.println("--- Buscar Prestamo ---");
+        // Compatible: Lee como String y compara usando toString() para evitar error con el int del Codigo 1
         String idBuscado = leerTexto("Ingrese el ID del prestamo: ");
         boolean encontrado = false;
 
@@ -75,7 +76,7 @@ public class BibliotecaApp {
     }
 
     static void actualizarPrestamo() {
-        System.out.println("--- Actualizar Pr3stamo ---");
+        System.out.println("--- Actualizar Prestamo ---");
         String idBuscado = leerTexto("Ingrese el ID del prestamo: ");
         boolean encontrado = false;
 
@@ -83,20 +84,21 @@ public class BibliotecaApp {
             if (prestamo.get(0).toString().equals(idBuscado)) {
                 System.out.println("Prestamo encontrado. Ingrese los nuevos datos.");
                 System.out.println("(Usuario actual: " + prestamo.get(1) + ", Libro actual: " + prestamo.get(2) + ")");
+                
                 String nuevoNombre = leerTexto("Nuevo nombre de usuario: ");
                 prestamo.set(1, nuevoNombre);
+                
                 String nuevoTitulo = leerTexto("Nuevo titulo del libro: ");
                 prestamo.set(2, nuevoTitulo);
+                
                 int nuevosDias = leerEntero("Nuevos dias de prestamo: ");
                 prestamo.set(3, nuevosDias);
-                System.out.print("Nueva multa por dia: ");
-                try {
-                    double nuevaMulta = Double.parseDouble(sc.nextLine().trim());
-                    prestamo.set(4, nuevaMulta);
-                } catch (Exception e) {
-                    System.out.println("Valor inválido para la multa. Se mantiene el valor anterior o se asigna 0.");
-                    prestamo.set(4, 0.0);
-                }
+                
+                // CAMBIO REALIZADO: Se usa leerEntero para ser compatible con el Código 1
+                // El código 1 guarda la multa como int, el código 2 original intentaba guardarlo como double.
+                int nuevaMulta = leerEntero("Nueva multa por dia: ");
+                prestamo.set(4, nuevaMulta);
+                
                 System.out.println("Prestamo actualizado correctamente.");
                 encontrado = true;
                 break;
