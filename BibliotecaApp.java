@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BibliotecaApp {
+
+    // Estructura: [0:id(int), 1:usuario(String), 2:libro(String), 3:dias(int), 4:multa(int)]
     static ArrayList<ArrayList<Object>> prestamos = new ArrayList<>();
     static Scanner sc = new Scanner(System.in);
 
@@ -45,10 +47,106 @@ public class BibliotecaApp {
         System.out.println("7. Salir");
     }
 
-    static void registrarPrestamo() { System.out.println("(Función registrarPrestamo pendiente de copiar del código 1)"); }
-    static void mostrarPrestamos() { System.out.println("(Función mostrarPrestamos pendiente de copiar del código 1)"); }
-    static void buscarPrestamoPorId() { System.out.println("(Función buscarPrestamoPorId pendiente de copiar del código 2)"); }
-    static void actualizarPrestamo() { System.out.println("(Función actualizarPrestamo pendiente de copiar del código 2)"); }
+    // ====== CRUD IMPLEMENTADO ======
+
+    static void registrarPrestamo() {
+        System.out.println("--- Registrar Préstamo ---");
+        ArrayList<Object> prestamo = new ArrayList<>();
+
+        int id = leerEntero("ID del préstamo: ");
+        String usuario = leerTexto("Nombre del usuario: ");
+        String libro = leerTexto("Título del libro: ");
+        int dias = leerEntero("Días de préstamo: ");
+        int multa = leerEntero("Multa por día: ");
+
+        prestamo.add(id);
+        prestamo.add(usuario);
+        prestamo.add(libro);
+        prestamo.add(dias);
+        prestamo.add(multa);
+
+        prestamos.add(prestamo);
+
+        System.out.println("Préstamo registrado correctamente.");
+    }
+
+    static void mostrarPrestamos() {
+        if (prestamos.isEmpty()) {
+            System.out.println("No hay préstamos registrados.");
+            return;
+        }
+
+        System.out.println("=== Lista de Préstamos ===");
+
+        for (ArrayList<Object> p : prestamos) {
+            System.out.println(
+                "ID: " + p.get(0) +
+                " | Usuario: " + p.get(1) +
+                " | Libro: " + p.get(2) +
+                " | Días: " + p.get(3) +
+                " | Multa/Día: " + p.get(4)
+            );
+        }
+    }
+
+    static void buscarPrestamoPorId() {
+        System.out.println("--- Buscar Préstamo ---");
+        int idBuscado = leerEntero("Ingrese el ID del préstamo: ");
+        boolean encontrado = false;
+
+        for (ArrayList<Object> prestamo : prestamos) {
+            // Convertimos a entero para comparar
+            int idActual = (int) prestamo.get(0);
+            
+            if (idActual == idBuscado) {
+                System.out.println("¡Encontrado!");
+                System.out.println("ID: " + prestamo.get(0));
+                System.out.println("Usuario: " + prestamo.get(1));
+                System.out.println("Libro: " + prestamo.get(2));
+                System.out.println("Días: " + prestamo.get(3));
+                System.out.println("Multa/Día: " + prestamo.get(4));
+                encontrado = true;
+                break;
+            }
+        }
+        if (!encontrado) {
+            System.out.println("No se encontró ningún préstamo con el ID: " + idBuscado);
+        }
+    }
+
+    static void actualizarPrestamo() {
+        System.out.println("--- Actualizar Préstamo ---");
+        int idBuscado = leerEntero("Ingrese el ID del préstamo a editar: ");
+        boolean encontrado = false;
+
+        for (ArrayList<Object> prestamo : prestamos) {
+            int idActual = (int) prestamo.get(0);
+
+            if (idActual == idBuscado) {
+                System.out.println("Préstamo encontrado. Ingrese los nuevos datos.");
+                
+                String nuevoNombre = leerTexto("Nuevo nombre de usuario: ");
+                prestamo.set(1, nuevoNombre);
+                
+                String nuevoTitulo = leerTexto("Nuevo título del libro: ");
+                prestamo.set(2, nuevoTitulo);
+                
+                int nuevosDias = leerEntero("Nuevos días de préstamo: ");
+                prestamo.set(3, nuevosDias);
+                
+                int nuevaMulta = leerEntero("Nueva multa por día: ");
+                prestamo.set(4, nuevaMulta);
+                
+                System.out.println("Préstamo actualizado correctamente.");
+                encontrado = true;
+                break;
+            }
+        }
+        if (!encontrado) {
+            System.out.println("No se puede actualizar: ID no encontrado.");
+        }
+    }
+
     static void eliminarPrestamo() {
         System.out.println("--- Eliminar Préstamo ---");
         int idBuscado = leerEntero("Ingrese el ID del préstamo a eliminar: ");
@@ -102,6 +200,9 @@ public class BibliotecaApp {
             System.out.println("No se encontró el préstamo con ese ID.");
         }
     }
+
+    // ====== Utilidades ======
+
     static int leerEntero(String msg) {
         while (true) {
             System.out.print(msg);
