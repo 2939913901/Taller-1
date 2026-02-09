@@ -162,7 +162,7 @@ for (ArrayList<Object> p : prestamos) {
 
 
 
-    // ====== Cálculo (por implementar) ======
+    // ====== Cálculo por implementar ======
 
     static void calcularTotalMultas() { /* TODO */ }
 
