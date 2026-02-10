@@ -78,7 +78,7 @@ for (int i = 0; i < prestamos.size(); i++) {
         multas=(diasUsados-diasPrestamos)*multaPorDia 
         System.out.println("El total de la multa es: "+multas);
         } else{
-            System.out.println("No tiene multa");
+            System.out.println("No cuenta con multa");
         }
     }
     
